@@ -27,11 +27,19 @@
     "load-grunt-tasks": "~2.0.0"
   },
   "scripts": {
-    "install": "node scripts/install.js && grunt dev",
+    "install": "node scripts/install.js",
     "watch": "grunt watch"
   },
   "main": "index.js",
   "author": "Jim Sheen - DJM Unlimited",
   "license": "ISC",
-  "description": "<h1>Jim's Grunt Bower Boilerplate for Wordpress Project Setup</h1>"
+  "description": "<h1>Jim's Grunt Bower Boilerplate for Wordpress Project Setup</h1>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jimladen/jims-blank-wordpress-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Jimladen/jims-blank-wordpress-theme/issues"
+  },
+  "homepage": "https://github.com/Jimladen/jims-blank-wordpress-theme#readme"
 }

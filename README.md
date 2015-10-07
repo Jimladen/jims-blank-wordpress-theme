@@ -22,6 +22,7 @@ npm install <br>
 <p>It also starts the 'grunt dev' task which monitors changes to files and compiles if necessary (e.g. sass files) and can be used in conjunction with <a href="https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en">live reload extension for chrome</a>.</p>
 <h2> Add a bower package project</h2>
 <p>Automatically adds &lt;script&gt; and &lt;link&gt; tags to index.html using  <a href="https://github.com/stephenplusplus/grunt-wiredep">grunt-wiredep</a>
+<strong>Due to a change in bower, css files are not automatically included with wiredep and must be manually included</strong>
 </p>
 <p>Open new terminal window</p>
 <code>
@@ -29,8 +30,7 @@ bower install ‘package’ —save
 </code>
 
 <h2>Build Project</h2>
-<code>
-grunt build</code>
+<code>grunt build</code>
 <ul>
 <li>Minifies css files</li>
 <li>Minifies images</li>
