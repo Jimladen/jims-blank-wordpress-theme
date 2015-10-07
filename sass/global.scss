@@ -1,0 +1,125 @@
+/* Custom SASS */
+
+
+/*
+    Colors
+*/
+
+$black: #000;
+$darkbg:#1d1d1d;
+$textgrey: #535353;
+$textdark: #232323;
+$textlight: #888c8d;
+
+/* 
+    Import includes
+*/
+
+@import "includes/mixins.scss";
+@import "includes/type.scss";
+@import "includes/default.scss";
+
+
+h1 {
+	color:blue;
+}
+
+
+section {
+    padding: 60px 0;
+    @include mobile {
+        padding: 40px 0;
+    }
+    &.noPadding {
+        padding: 0;
+    }
+    &.darkbg {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        a,
+        ul,
+        li,
+        span,
+        strong {
+            color: white;
+        }
+    }
+    background-size:cover;
+    &.title {
+        padding-bottom: 0;
+    }
+    &.caseStudy {
+        padding: 0;
+    }
+    &.awards {
+        background: $darkbg;
+        color: white;
+    }
+    &.newspress {
+        padding: 20px 0 40px;
+    }
+}
+
+.whitebg {
+    background: white;
+}
+
+
+.row {
+    max-width: 93.750rem;
+    height:100%;
+}
+
+.fullHeight {
+    height: 100%;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.full {
+    width: 100%;
+    height: 100vh;
+    &.bg {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        @include mobile {
+            background-size: auto 100%;
+        }
+    }
+}
+
+
+.content {
+    width: 100%;
+    height: 100%;
+    &.image {
+        padding: 0;
+    }
+    p {
+        @include openSansLight(0.9em);
+        color: $textdark;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    img {
+        width: 100%;
+        height: 100%;
+    }
+    &.general_content {
+        h3 {
+            font-size: 1.875em;
+            line-height: 1.25em;
+            margin: 0;
+            color: $textlight;
+        }
+    }
+}

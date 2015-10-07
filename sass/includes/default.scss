@@ -1,0 +1,93 @@
+/* Default Styles */
+
+/*
+Variables
+*/
+
+$margin: 20px;
+$largeMargin: 40px;
+$padding: 20px;
+$largePadding: 40px;
+
+
+.marginTop {
+    margin-top: $margin!important;
+    &.largeMargin {
+        margin-top: $largeMargin!important;
+    }
+}
+
+.marginBottom {
+    margin-bottom: $margin!important;
+    &.largeMargin {
+        margin-bottom: $largeMargin!important;
+    }
+}
+
+.marginTopBottom {
+    margin-top: $margin!important;
+    margin-bottom: $margin!important;
+    &.largeMargin {
+        margin-top: $largeMargin!important;
+        margin-bottom: $largeMargin!important;
+    }
+}
+
+.marginAll {
+    margin: $margin!important;
+    &.largeMargin {
+        margin: $largeMargin!important;
+    }
+}
+
+
+.paddingTop {
+    padding-top: $padding!important;
+    &.largePadding {
+        padding-top: $largePadding!important;
+    }
+}
+
+.paddingBottom {
+    padding-bottom: $padding!important;
+    &.largePadding {
+        padding-bottom: $largePadding!important;
+    }
+}
+
+.paddingTopBottom {
+    padding-top: $padding!important;
+    padding-bottom: $padding!important;
+    &.largePadding {
+        padding-top: $largePadding!important;
+        padding-bottom: $largePadding!important;
+    }
+}
+
+.paddingAll {
+	padding:$padding!important;
+	&.largePadding {
+		padding:$largePadding!important;
+	}
+}
+
+/* 
+    Vertical Centering
+*/
+
+.table {
+    display: table;
+    width: 100%;
+    height: 100%;
+    .cell {
+        width: 100%;
+        display: table-cell;
+        vertical-align: middle;
+        &.top {
+            vertical-align: top;
+        }
+        &.bottom {
+            vertical-align: bottom;
+        }
+    }
+}
