@@ -1,0 +1,26 @@
+{
+  "name": "jims-wordpress-setup",
+  "version": "1.0.0",
+  "authors": [
+    "Jim Sheen"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.5.3"
+  },
+   "overrides": {
+      "foundation": {
+        "main": [
+        "css/foundation.css",
+        "js/foundation.js"
+        ]
+      }
+    }
+}

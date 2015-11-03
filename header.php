@@ -17,8 +17,8 @@
                 <!--[if lt IE 9]>
                 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js"></script>
                 <![endif]-->
-                
-                <link href="<?php echo get_template_directory_uri();?>/bower_components/foundation/css/foundation.css" rel="stylesheet">
+                <!-- Kept hard coded link just in case wiredep doesn't auto include foundation -->
+                <!-- <link href="<?php // echo get_template_directory_uri();?>/bower_components/foundation/css/foundation.css" rel="stylesheet"> -->
                  <link href="<?php echo get_template_directory_uri();?>/css/global.css" rel="stylesheet">
                 <!-- bower:css --><!-- endbower -->
 

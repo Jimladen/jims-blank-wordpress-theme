@@ -19,7 +19,15 @@ bower_config = JSON.stringify({
         "bower_components",
         "test",
         "tests"
-    ]
+    ],
+     "overrides": {
+      "foundation": {
+        "main": [
+        "css/foundation.css",
+        "js/foundation.js"
+        ]
+      }
+    }
 });
 
 
