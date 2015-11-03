@@ -22,11 +22,7 @@
                  <link href="<?php echo get_template_directory_uri();?>/css/global.css" rel="stylesheet">
                 <!-- bower:css --><!-- endbower -->
 
-
-                <?php wp_head(); ?>
-                
-
-                <!-- bower:js --><!-- endbower -->
+                 <!-- bower:js --><!-- endbower -->
             </head>
             <header>
                 <div class="wrap">

@@ -4,6 +4,6 @@ module.exports = {
             trace: true
         },
         fileList: ['.bowerrc', 'bower.json'],
-        dirList: ['js/', 'css/', 'templates/', '.sass-cache/', 'bower_components/', 'clones-folder/', 'node_modules/']
+        dirList: ['js/', 'css/', 'templates/', '.sass-cache/', 'bower_components/', 'clones-folder/']
     }
 }
