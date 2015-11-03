@@ -52,6 +52,9 @@ if (have_posts()):
                 $section_open = '';
                 $section_close = '';
                 $vertical_open = $vertical_close = '';
+                $post_type = '';
+                $post_title = '';
+                $single_post = '';
                 
 
                 
@@ -156,6 +159,39 @@ if (have_posts()):
                             $class = 'general_content';
                             $content = get_sub_field($class);
                             break;
+                         case 'post_type' :
+                            $post_type_var = 'post_type_selector';
+                            $post_type = get_sub_field( $post_type_var );
+                            $class = 'post_type';
+                            $post_title .= '';
+                            $single_post .= '';
+                            $news_all_posts = ''; // Define the variable
+                            $section_title = 'Press Releases';
+                            
+                            $the_query = new WP_Query( array ( 'posts_per_page' => 3, 'post_type' => $post_type ) ); /*  */
+
+                            while ($the_query->have_posts() ) : $the_query->the_post();
+
+                            $post_title  = get_the_title();
+                            $news_excerpt = get_the_content();
+                            $files = '';
+                            $file = '';
+                            $post_id = $post->ID;
+                            if (get_field('files', $post_id)) : 
+                                while (has_sub_field('files', $post_id)) :
+                                    $file = get_sub_field('file');
+                                    $file_link = '<a class="fileBtn" href="' . $file["url"] . '">Open File</a>';
+                                    $files .= '<div class="row file"><div class="left large-10 medium-10 small-12 columns"><p>' . get_sub_field('file_name') . '</p></div><div class="right large-2 medium-2 small-12 columns">' . $file_link . '</div><br class="clr"></div>';
+                                    $test = 'test';
+                                endwhile;
+                            endif;
+                            $single_post = '<article><h1 class="title">'.$post_title.'</h1><div class="press-release"><p>'.$news_excerpt.'</p></div>' . $files . '</article>';
+
+                            $content .= $single_post; // Add each post to the variable
+
+
+                            endwhile;
+                            break;
 
                     }
                     
@@ -168,6 +204,8 @@ if (have_posts()):
                     
               
                         echo $content;
+
+                       
                     
                     
                     echo '</div></div></div>';

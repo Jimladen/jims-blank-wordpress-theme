@@ -26,5 +26,15 @@ module.exports = {
             },
         ]
     },
+    plugins: {
+        files: [
+        {
+            expand:true,
+            cwd: 'clones-folder',
+            src: ['**/*'],
+            dest: '../../plugins/',
+            filter: 'isFile'
+        }]
+    }
     // }
 }

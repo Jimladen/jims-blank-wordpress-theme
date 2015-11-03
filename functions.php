@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * Register our sidebars and widgetized areas.
  *
@@ -49,5 +45,7 @@ add_action( 'widgets_init', 'theme_register_widgets_init' );
     }
     
     add_action('wp_enqueue_scripts', 'foundationpress_scripts');
+
+    add_theme_support( 'title-tag' );
 
 ?>
