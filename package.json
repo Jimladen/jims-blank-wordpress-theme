@@ -29,7 +29,8 @@
   },
   "scripts": {
     "install": "node scripts/install.js",
-    "watch": "grunt watch"
+    "watch": "grunt watch",
+    "postinstall" : "bower install foundation --save && grunt dev"
   },
   "main": "index.js",
   "author": "Jim Sheen - DJM Unlimited",

@@ -41,7 +41,7 @@ module.exports = function(grunt) {
         return object;
     }
 
-    grunt.log.write('gruntfile');
+    //grunt.log.write('gruntfile');
 
     // Initial config
     var config = {
