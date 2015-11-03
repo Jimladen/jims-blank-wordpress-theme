@@ -1,5 +1,7 @@
 {
   "clones-folder": {
-      "acf-post-type-selector" : "https://github.com/TimPerry/acf-post-type-selector.git"
+      "acf-post-type-selector" : "https://github.com/TimPerry/acf-post-type-selector.git",
+      "advanced-custom-fields" : "https://github.com/elliotcondon/acf.git",
+      "acf-repeater" : "https://jim_sheen@bitbucket.org/jim_sheen/acf-repeater.git"
   }
 }
