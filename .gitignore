@@ -38,11 +38,12 @@ Thumbs.db
 
 # Custom #
 
-node_modules/
-clones_folder/
-bower_components/
-.sass_cache/
+node_modules/*
+clones-folder/*
+bower_components/*
+.sass-cache/*
+css/*
+js/*
 bower.json
 .bowerrc
 
-dirList: ['js/', 'css/', 'templates/', '.sass-cache/', 'bower_components/', 'clones-folder/']
