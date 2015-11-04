@@ -3,6 +3,7 @@
       "acf-post-type-selector" : "https://github.com/TimPerry/acf-post-type-selector.git",
       "advanced-custom-fields" : "https://github.com/elliotcondon/acf.git",
       "acf-repeater" : "https://jim_sheen@bitbucket.org/jim_sheen/acf-repeater.git",
+      "acf-repeater-collapser" : "https://github.com/mrwweb/ACF-Repeater-Collapser.git",
       "wordpress-importer" : "https://github.com/crowdfavorite-mirrors/wp-wordpress-importer.git"
   }
 }
