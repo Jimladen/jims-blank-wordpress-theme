@@ -191,7 +191,18 @@ if (have_posts()):
 
 
                             endwhile;
+                            wp_reset_query();
                             break;
+                        case 'widget_area' :
+                            function get_widget_area() {
+                                ob_start();
+                                dynamic_sidebar( get_sub_field('widget_area') );
+                                $sidebar = ob_get_contents();
+                                ob_end_clean();
+                                return $sidebar;
+                            }
+                            $content = get_widget_area();
+                        break;
 
                     }
                     
