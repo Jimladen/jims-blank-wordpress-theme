@@ -18,12 +18,19 @@ npm install <br>
   <li>js/global.js</li>
   <li>templates/</li>
   <li>css/</li>
+  <li>node_modules/</li>
+  <li>clones-folder/</li>
 </ul>
-<p>It also starts the 'grunt dev' task which monitors changes to files and compiles if necessary (e.g. sass files) and can be used in conjunction with <a href="https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en">live reload extension for chrome</a>.</p>
+<p>Post install runs two functions: </p>
+<p>'bower install foundation --save' installs foundation and adds it to the bower.json file. </p>
+<p>It also starts the 'grunt dev' task which does the following:</p>
+<ul>
+  <li>monitors changes to files and compiles if necessary (e.g. sass files) and can be used in conjunction with <a href="https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en">live reload extension for chrome</a>.</li>
+  <li>Installs Wordpress plugins to the parent wordpress plugins directory</li>
+  <li>And runs wiredep to auto link foundation dependencies in header.php</li>
+</ul>
 <h2> Add a bower package project</h2>
-<p>Automatically adds &lt;script&gt; and &lt;link&gt; tags to index.html using  <a href="https://github.com/stephenplusplus/grunt-wiredep">grunt-wiredep</a>
-<strong>Due to a change in bower, css files are not automatically included with wiredep and must be manually included</strong>
-</p>
+<p>Automatically adds &lt;script&gt; and &lt;link&gt; tags to index.html using <a href="https://github.com/stephenplusplus/grunt-wiredep">grunt-wiredep</a> <strong>Due to a change in bower, css files are not automatically included with wiredep and must be manually included (Foundation is manually included for this theme)</strong></p>
 <p>Open new terminal window</p>
 <code>
 bower install ‘package’ —save 
@@ -66,5 +73,5 @@ Copy bower_components to folder (faster than recursive lookup using grunt-contri
 <a href="https://github.com/timmywil/grunt-bowercopy">grunt-bower-copy</a>
 <br>
 Replace string in files
-<a href="https://github.com/outaTiME/grunt-replace">grunt-replace</a>
-</p>
+<a href="https://github.com/outaTiME/grunt-replace">grunt-replace</a><br>
+Batch download git repos - <a href="https://github.com/elliot-a/grunt-git-batch-clone">grunt-git-batch-clone</a></p>
