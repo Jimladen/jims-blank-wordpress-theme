@@ -20,6 +20,14 @@ $textlight: #888c8d;
 @import "includes/default.scss";
 
 
+body {
+    &.logged-in.admin-bar {
+        header {
+            margin-top:32px;
+        }
+    }   
+}
+
 h1 {
 	color:blue;
 }
