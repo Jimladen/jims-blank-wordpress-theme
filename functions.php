@@ -1,51 +1,28 @@
 <?php
 
 /**
- * Register our sidebars and widgetized areas.
+ * Jim's includes
  *
+ * The $jim_includes array determines the code library included in your theme.
+ * Add or remove files to the array as needed. Supports child theme overrides.
+ *
+ * Please note that missing files will produce a fatal error.
+ *
+ * @link https://github.com/roots/roots/pull/1042
  */
-function theme_register_widgets_init() {
-
-	register_sidebar( array(
-		'name' => 'Blank Sidebar',
-		'id' => 'blank_sidebar',
-		'before_widget' => '<div>',
-		'after_widget' => '</div>',
-		'before_title' => '<h2>',
-		'after_title' => '</h2>',
-	) );
+$jim_includes = array(
+  'lib/scripts.php',         // Scripts and stylesheets
+  'lib/sidebars.php',
+  'lib/extras.php',          // Custom functions
+  'lib/theme_customizer.php'
+);
+foreach ($jim_includes as $file) {
+  if (!$filepath = locate_template($file)) {
+    trigger_error(sprintf(__('Error locating %s for inclusion', 'roots'), $file), E_USER_ERROR);
+  }
+  require_once $filepath;
 }
-add_action( 'widgets_init', 'theme_register_widgets_init' );
+unset($file, $filepath);
 
-
-  function foundationpress_scripts() {
-        
-        // Enqueue the main Stylesheet.
-        // wp_enqueue_style('main-stylesheet', get_stylesheet_directory_uri() . '/assets/stylesheets/foundation.css');
-        
-        // Deregister the jquery version bundled with WordPress.
-        wp_deregister_script('jquery');
-    
-        // // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
-        wp_enqueue_script( 'jquery', '//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js', array(), '2.1.0', false );
-    
-        // wp_enqueue_script( 'foundation', get_template_directory_uri() . '/assets/javascript/foundation.js', array('jquery'), '5.5.2', true );
-
-        
-        // // path to directory to scan
-        // $theme_name = get_template();
-        // $directory = "wp-content/themes/" . $theme_name . "/assets/javascript/vendor/";
-
-        // $files = glob($directory . "*.js");
-
-        // foreach ($files as $file) {
-        	
-        //     wp_enqueue_script( basename($file), get_template_directory() . '/assets/javascript/vendor/' . basename($file), array('jquery'), '', true );
-        // }
-    }
-    
-    add_action('wp_enqueue_scripts', 'foundationpress_scripts');
-
-    add_theme_support( 'title-tag' );
 
 ?>

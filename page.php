@@ -216,7 +216,10 @@ if (have_posts()):
               
                         echo $content;
 
-                       
+
+                        $theme_mod =  get_theme_mod('checkbox_setting');
+
+                        if ($theme_mod) : echo $theme_mod; endif; 
                     
                     
                     echo '</div></div></div>';

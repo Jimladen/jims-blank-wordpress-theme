@@ -45,12 +45,6 @@ fs.outputFile(".bowerrc", bowercc_config, function(err) {
 })
 
 
-fs.outputFile('js/global.js', '/* Custom JS */', function(err) {
-    if (err) {
-        console.log(err) // => null
-    }
-
-})
 
 fs.ensureDir('templates/', function(err) {
     if (err) {

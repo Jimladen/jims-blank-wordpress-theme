@@ -26,6 +26,16 @@ body {
             margin-top:32px;
         }
     }   
+    p {
+        @include openSansLight(0.9em);
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    img {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 h1 {
@@ -117,17 +127,6 @@ section {
     height: 100%;
     &.image {
         padding: 0;
-    }
-    p {
-        @include openSansLight(0.9em);
-        color: $textdark;
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
-    img {
-        width: 100%;
-        height: 100%;
     }
     &.general_content {
         h3 {
