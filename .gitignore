@@ -43,7 +43,6 @@ clones-folder/*
 bower_components/*
 .sass-cache/*
 css/*
-js/*
 bower.json
 .bowerrc
 
