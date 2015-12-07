@@ -4,7 +4,12 @@
  * General Page Template
  */
 
-get_header(); ?>
+get_header();
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
 
 <main class="">
   <!-- <div class="row fullHeight collapse">
@@ -13,34 +18,15 @@ get_header(); ?>
 if (have_posts()):
     while (have_posts()):
         the_post(); ?>
-      <?php
-        $url = wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>
-      
-      <!-- 	<section class="full bg" style="background-image:url(<?php
-        echo $url; ?>);">
-       				<div class="table">
-       					<div class="cell">
-		       				<h2 class="white semiBold wow fadeInLeft text-center" data-wow-delay="1s"><?php
-        the_title(); ?></h2>
-				        </div>
-				    </div>
-       			</section>  --> 
-      
-      <!-- 	<section class="full white-bg">
-	       				<div class="table">
-	       					<div class="cell">
-			       				<h2 class="white semiBold wow fadeInLeft text-center" data-wow-delay="1s"><?php
-        the_title(); ?></h2>
-					        </div>
-					    </div>
-	       			</section>  -->
       
       <?php
         if (get_field('section')) {
 ?>
       <?php
+            $section_count = 0;
+            
             while (has_sub_field('section')) {
-                
+                $section_count++;
                 $style = '';
                 $bg_class = '';
                 $row_class = '';
@@ -55,8 +41,6 @@ if (have_posts()):
                 $post_type = '';
                 $post_title = '';
                 $single_post = '';
-                
-
                 
                 if (get_sub_field('section_padding') == false) {
                     $padding = 'noPadding';
@@ -91,30 +75,41 @@ if (have_posts()):
                         break;
                 }
                 $style = 'style="' . $style . '" ';
+
+                 if (get_sub_field('hide_row_mobile')) {
+                    $row_class .= ' hide-for-small-only';
+                }
+
                 $class = $bg_class . ' ' . $row_class . ' ' . $padding . ' ' . $dark . ' ' . $full;
                 
-
+                $firstDivBoxStart = $firstDivBoxEnd = '';
+                if ($section_count === 1) {
+                    $class.= ' firstSection';
+                    $firstDivBoxStart = '<div class="paddingAll mainBox"><div class="borderYellow">';
+                    $firstDivBoxEnd = '</div></div>';
+                }
+                
                 if (get_sub_field('full_width') == true) {
-                    $section_open = '<section class="wow fadeInUp ' . $class . '"' . $style . ' data-wow-offset="50"><div class="row">';
-                    $section_close = '</div></section>';
-                }
+                    $section_open = '<section class="wow fadeInUp ' . $class . '"' . $style . ' data-wow-offset="50"><div class="row ' . $class . '" data-equalizer><div class="table"><div class="cell">' . $firstDivBoxStart . '';
+                    $section_close = '<br class="clr"></div></div></div>' . $firstDivBoxEnd . '</section>';
+                } 
                 else {
-                        $section_open = '<section class="wow fadeInUp row ' . $class . '"' . $style . ' data-wow-offset="50">';
-                        $section_close = '</section>';
+                    $section_open = '<section class="wow fadeInUp row ' . $class . '"' . $style . ' data-wow-offset="50">';
+                    $section_close = '</section>';
                 }
-
-
+                
                 echo $section_open;
+                
                 // echo '<section class="wow fadeInUp row ' . $class . '"' . $style . ' data-wow-offset="50">';
                 
                 $box_count = 0;
                 
                 // while has sub field columns
-
-                while (has_sub_field('column')) { 
+                
+                while (has_sub_field('column')) {
                     $column_center = '';
                     $padding = '';
-
+                    
                     if (get_sub_field('center_columns')) {
                         $center_columns_field = get_sub_field('center_columns');
                         switch ($center_columns_field) {
@@ -150,94 +145,195 @@ if (have_posts()):
                     $content = '';
                     
                     switch (get_sub_field('content_type')) {
+                            
+                            /******************
+                             *
+                             *   Image
+                             *
+                             *******************/
                         case 'image':
                             $class = 'image';
                             $content = '<img src="' . get_sub_field($class) . '">';
                             break;
-
+                            
+                            /******************
+                             *
+                             *   General Content
+                             *
+                             *******************/
                         case 'general_content':
                             $class = 'general_content';
                             $content = get_sub_field($class);
-                            break;
-                         case 'post_type' :
-                            $post_type_var = 'post_type_selector';
-                            $post_type = get_sub_field( $post_type_var );
-                            $class = 'post_type';
-                            $post_title .= '';
-                            $single_post .= '';
-                            $news_all_posts = ''; // Define the variable
-                            $section_title = 'Press Releases';
-                            
-                            $the_query = new WP_Query( array ( 'posts_per_page' => 3, 'post_type' => $post_type ) ); /*  */
-
-                            while ($the_query->have_posts() ) : $the_query->the_post();
-
-                            $post_title  = get_the_title();
-                            $news_excerpt = get_the_content();
-                            $files = '';
-                            $file = '';
-                            $post_id = $post->ID;
-                            if (get_field('files', $post_id)) : 
-                                while (has_sub_field('files', $post_id)) :
-                                    $file = get_sub_field('file');
-                                    $file_link = '<a class="fileBtn" href="' . $file["url"] . '">Open File</a>';
-                                    $files .= '<div class="row file"><div class="left large-10 medium-10 small-12 columns"><p>' . get_sub_field('file_name') . '</p></div><div class="right large-2 medium-2 small-12 columns">' . $file_link . '</div><br class="clr"></div>';
-                                    $test = 'test';
-                                endwhile;
+                            $found = array();
+                            if (!is_home()) {
+                                
+                                if (preg_match("/(<h2>)[^.]+?(<\/h2>)/i", $content, $found)) {
+                                    
+                                    //$content .= ' TEXT CONTAINS H2 ' . $found[0];
+                                    $content = preg_replace("/(<h2>)[^*]+?(<\/h2>)/i", "<div class='titleContainer wow fadeInUp'>" . $found[0] . "</div>", $content);
+                                    
+                                    // $content .= 'TESTING H2 THINGY';
+                                    
+                                }
+                            }
+                            $column_class = '';
+                            if (get_sub_field('equal_height')):
+                                $column_class .= ' equalHeight';
                             endif;
-                            $single_post = '<article><h1 class="title">'.$post_title.'</h1><div class="press-release"><p>'.$news_excerpt.'</p></div>' . $files . '</article>';
+                            if (get_sub_field('arrow_link')):
+                                $column_class.= ' arrow_link';
+                                $content.= ' <div class="yellowArrowRight"><a href="' . get_sub_field('page_link') . '"><img src="' . get_template_directory_uri() . '/img/yellow-arrow-right.png"></a></div>';
+                            endif;
+                            if (get_sub_field('collapse_field_mobile')) :
 
-                            $content .= $single_post; // Add each post to the variable
+                                $column_class .= ' collapse_field_mobile';
 
-
-                            endwhile;
-                            wp_reset_query();
+                                 
+                            endif;
                             break;
-                        case 'widget_area' :
+                            
+                            /******************
+                             *
+                             *   Post Type
+                             *
+                             *******************/
+                        case 'post_type':
+                            $post_type_var = 'post_type_selector';
+                            $post_type = get_sub_field($post_type_var);
+                            $class = 'post_type ' . $post_type;
+                            $post_title.= '';
+                            $single_post.= '';
+                            $news_all_posts = '';
+                             // Define the variable
+                            $number_of_posts = '-1';
+                            $post_count = 0;
+                            $post_columns = 'large-3 medium-6 small-12';
+                            
+                            if (get_sub_field('number_of_posts')) {
+                                $number_of_posts = get_sub_field('number_of_posts');
+                            }
+                            $content.= '<div class="row">';
+                            ob_start();
+                            
+                            include (get_template_directory() . '/templates/post-type-' . $post_type . '.php');
+                            
+                            $content.= ob_get_contents();
+                            
+                            ob_end_clean();
+                            
+                            $content .= '</div>';
+                            break;
+                            
+                            /******************
+                             *
+                             *   Widget Area
+                             *
+                             *******************/
+                        case 'widget_area':
                             function get_widget_area() {
                                 ob_start();
-                                dynamic_sidebar( get_sub_field('widget_area') );
+                                dynamic_sidebar(get_sub_field('widget_area'));
                                 $sidebar = ob_get_contents();
                                 ob_end_clean();
                                 return $sidebar;
                             }
                             $content = get_widget_area();
-                        break;
+                            break;
+                            
+                            /******************
+                             *
+                             *   History
+                             *
+                             *******************/
+                        case 'history':
+                            $class = 'history';
+                            
+                            $content.= '<div class="historyContainer"><div class="small-6 medium-6 large-6 columns yearContainer">';
+                            
+                            $year_count = $desc_count = '';
+                            while (has_sub_field($class)) {
+                                $year_count++;
+                                $active = '';
+                                if ($year_count == 1) {
+                                    $active = 'active';
+                                }
+                                if (get_sub_field('year')) {
+                                    $year = get_sub_field('year');
+                                    $content.= '<div class="year"><a data-id="year' . $year_count . '" class="' . $active . '">' . $year . '</a></div>';
+                                }
+                            }
+                            
+                            $content.= '</div>';
+                            
+                            $content.= '<div class="small-6 medium-6 large-6 columns descContainer">';
+                            
+                            while (has_sub_field($class)) {
+                                
+                                if (get_sub_field('description')) {
+                                    $desc_count++;
+                                    $active = '';
+                                    if ($desc_count == 1) {
+                                        $active = 'active';
+                                    }
+                                    $description = get_sub_field('description');
+                                    $content.= '<div class="description ' . $active . '" id="year' . $desc_count . '"><p>' . $description . '</p></div>';
+                                }
+                            }
+                            
+                            $content.= '</div><br class="clr"></div>';
+                            
+                            break;
+
 
                     }
+                     // end column loop
                     
                     //echo $box_text;
                     
-                    echo '<div class="' . $large_columns . ' ' . $medium_columns . ' ' . $small_columns . ' ' . $padding . ' ' . $column_class . ' ' . $column_center . ' columns equalHeight fullHeight">';
-                     // columns
+                    echo '<div class="' . $large_columns . ' ' . $medium_columns . ' ' . $small_columns . ' ' . $padding . ' ' . $column_class . ' ' . $column_center . ' columns">';
+                    
+                    // columns
                     
                     echo '<div class="content ' . $class . '"><div class="table"><div class="cell">';
                     
-              
-                        echo $content;
-
-
-                        $theme_mod =  get_theme_mod('checkbox_setting');
-
-                        if ($theme_mod) : echo $theme_mod; endif; 
+                    // echo '<h1>Box Count: ' . $box_count . '</h1>';
+                    // echo $found[0];
                     
+                    // if (get_sub_field('content_type') === 'post_type') {
+                    //     include('templates/post-type-' . $post_type . '.php');
+                    //    // echo pv(test);
+                    // }
+                    // else {
+                    echo $content;
+                    
+                    // }
+                    
+                    // echo pv(get_sub_field('content_type'));
+                    
+                    // print_r($post_columns_array);
+                    
+                    // $theme_mod =  get_theme_mod('checkbox_setting');
+                    
+                    // if ($theme_mod) : echo $theme_mod; endif;
                     
                     echo '</div></div></div>';
-                     // content
+                    
+                    // content
                     
                     echo '</div>';
-                     //content columns
                     
-
+                    //content columns
+                    
+                    
                 }
-
-
+                
                 echo $section_close;
 ?>
 
       <?php
             }
-             // while has_sub_field
+            
+            // while has_sub_field
             
             
         }
@@ -245,7 +341,11 @@ if (have_posts()):
       <?php
     endwhile; ?>
       <?php
-endif; ?>
+endif;
+function pv($var) {
+    return '<h1>' . $var . '</h1>';
+}
+?>
     <!-- </div> -->
     <!-- large-12 columns  -->
   <!-- </div> -->
