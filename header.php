@@ -18,9 +18,16 @@
                 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js"></script>
                 <![endif]-->
                 <!-- bower:css -->
+                <link rel="stylesheet" href="<?php echo get_template_directory_uri();?>/build/bower_components/foundation/css/foundation.css" />
                 <!-- endbower -->
 
                  <!-- bower:js -->
+                 <script src="<?php echo get_template_directory_uri();?>/build/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
+                 <script src="<?php echo get_template_directory_uri();?>/build/bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
+                 <script src="<?php echo get_template_directory_uri();?>/build/bower_components/fastclick/lib/fastclick.js" type="text/javascript"></script>
+                 <script src="<?php echo get_template_directory_uri();?>/build/bower_components/jquery.cookie/jquery.cookie.js" type="text/javascript"></script>
+                 <script src="<?php echo get_template_directory_uri();?>/build/bower_components/jquery-placeholder/jquery.placeholder.js" type="text/javascript"></script>
+                 <script src="<?php echo get_template_directory_uri();?>/build/bower_components/foundation/js/foundation.js" type="text/javascript"></script>
                  <!-- endbower -->
 
                 <?php wp_head(); ?>
@@ -35,21 +42,24 @@
                
                 
             </head>
+
+
+            <?php 
+
+            $logo = get_theme_mod('logo_setting');
+
+            ?>
+
             <header>
-                <div class="wrap">
-                    <div class="top-bar-container contain-to-grid">
-                       <nav class="top-bar" data-topbar="" role="navigation">
-                            <ul class="title-area top-bar-left">
-                                <li class="name">
-                                    <h1><a href="/"><?php echo get_bloginfo('name');?></a></h1>
-                                </li>
-                            </ul>
-                            <section class="top-bar-section">
-                                <div class="right">
-                                    <?php wp_nav_menu(); ?>
-                                </div>
-                            </section>
-                        </nav>
+                <nav class="row medium-collapse">
+                    <div class="medium-8 columns">
+                        <?php wp_nav_menu(); ?>
                     </div>
-                </header>
-                <body <?php body_class(); ?>>
+                    <div class="medium-4 columns">
+                        <div class="logo">
+                           <img src="<?php print_r($logo); ?>">
+                       </div>
+                    </div>
+                </nav>
+            </header>
+            <body <?php body_class(); ?>>

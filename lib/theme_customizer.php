@@ -29,6 +29,14 @@ class theme_customizer
 
     public function demo_section( $wp_manager )
     {
+
+
+        $wp_manager->add_section( 'logo_section', array(
+            'title'          => 'Logo',
+            'priority'       => 20,
+        ) );
+
+
         $wp_manager->add_section( 'customiser_demo_section', array(
             'title'          => 'Colors',
             'priority'       => 35,
@@ -157,6 +165,18 @@ class theme_customizer
             'settings'   => 'image_setting',
             'priority' => 8
         ) ) );
+
+
+        $wp_manager->add_setting('logo_setting');
+        
+        $wp_manager->add_control( new WP_Customize_Image_Control( $wp_manager, 'logo_setting', array(
+            'label'   => 'Logo',
+            'section' => 'logo_section',
+            'settings'   => 'logo_setting',
+            'priority' => 10
+        ) ) );
+
+
     }
 
 }

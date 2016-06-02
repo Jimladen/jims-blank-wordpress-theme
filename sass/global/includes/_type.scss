@@ -1,0 +1,67 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
+
+/* include fonts */
+
+$openSans: 'Open Sans', sans-serif;
+
+@mixin openSans($fontSize:"") {
+    font-family: $openSans;
+    font-weight: 400;
+    font-size: unquote($fontSize);
+}
+
+@mixin openSansSemiBold($fontSize:"") {
+    font-family: $openSans;
+    font-weight: 600;
+    font-size: unquote($fontSize);
+}
+
+@mixin openSansLight($fontSize:"") {
+    font-family: $openSans;
+    font-weight: 300;
+    font-size: $fontSize;
+}
+
+
+/* example : @include oxygenLight(1.2em) { color:black; } */
+
+.xlargetxt {
+    font-size:1.4em; 
+}
+.largetxt {
+    font-size:1.2em; 
+}
+.xsmalltxt {
+    font-size:0.6em;
+}
+
+.smalltxt {
+    font-size:0.8em; 
+}
+
+.block {
+    display:block;
+}
+
+.light {
+    @include openSansLight;
+}
+
+.semiBold {
+    @include openSansSemiBold;
+}
+
+
+span, p, a {
+    &.upper {
+        text-transform:uppercase;
+    }
+}
+
+.error {
+    color:red;    
+}
+
+h1,h2,h3,h4, h5 {
+    @include openSansLight;
+}
